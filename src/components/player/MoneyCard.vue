@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img width='50px' height="30px" :src="imgUrl" alt="">
+    <img width='50px' height="30px" :src="imgUrl" alt="error" :title="`$`+values[value]">
     <span style="width:50px">: {{money}}</span>
   </div>
 </template>
@@ -9,6 +9,13 @@
   export default {
     name: "MoneyCard",
     props: {
+      value: {
+        type: Number,
+        required: true,
+        default () {
+          return 0;
+        }
+      },
       money: {
         type: Number,
         required: true,

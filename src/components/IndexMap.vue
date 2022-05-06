@@ -1,15 +1,15 @@
 <template>
   <div class="hello">
     <div class="player">
-      <player-info :imgUrl="icons[0]"></player-info>
-      <player-info :imgUrl="icons[1]"></player-info>
+      <player-info :playerId="0" :imgUrl="icons[0]" :color="`红色棋子`"></player-info>
+      <player-info :playerId="3" :imgUrl="icons[1]" :color="`蓝色棋子`"></player-info>
     </div>
     <div class="main-map">
       <main-map></main-map>
     </div>
     <div class="player">
-      <player-info :imgUrl="icons[2]"></player-info>
-      <player-info :imgUrl="icons[3]"></player-info>
+      <player-info :playerId="1" :imgUrl="icons[2]" :color="`绿色棋子`"></player-info>
+      <player-info :playerId="2" :imgUrl="icons[3]" :color="`黄色棋子`"></player-info>
     </div>
   </div>
 </template>
@@ -47,6 +47,6 @@
     height: 100%;
     width: 48%;
     left: 100%;
-    background: rgb(210, 210, 210);
+    background: rgb(141, 221, 227);
   }
 </style>
