@@ -2,9 +2,9 @@
   <div class="map">
     <div>
       <div class="game-map">
-        <div :sectionId="27" class="corner1">
+        <div :sectionId="27" class="corner1" title="洲际轨道交通">
           <div class="corner-flags">
-            <div v-for="item in locations" :key="item">
+            <div v-for="item in locations" :key="item.title" :title="item.title">
               <img width="30px" height="30px" v-if="item.sectionId==27" :src="item.color" alt="error">
             </div>
           </div>
@@ -24,7 +24,7 @@
         </div>
         <div :sectionId="0" class="corner2" title="起点+董事会（可领工资）">
           <div class="corner-flags">
-            <div v-for="item in locations" :key="item">
+            <div v-for="item in locations" :key="item.title" :title="item.title">
               <img width="30px" height="30px" v-if="item.sectionId==0" :src="item.color" alt="error">
             </div>
           </div>
@@ -65,9 +65,9 @@
           <basic-item :sectionId="7" :location="locations" :top='false' :itemColor="`#FFFD91`"></basic-item>
           <basic-item :sectionId="8" :location="locations" :top='false' :title="`光谷四路`"></basic-item>
         </div>
-        <div :sectionId="18" class="corner3">
+        <div :sectionId="18" class="corner3" title="洲际轨道交通">
           <div class="corner-flags">
-            <div v-for="item in locations" :key="item">
+            <div v-for="item in locations" :key="item.title" :title="item.title">
               <img width="30px" height="30px" v-if="item.sectionId==18" :src="item.color" alt="error">
             </div>
           </div>
@@ -85,9 +85,9 @@
           <basic-item :sectionId="11" :location="locations" :title="`光谷六路`"></basic-item>
           <basic-item :sectionId="10" :location="locations" :title="`光谷五路`"></basic-item>
         </div>
-        <div :sectionId="9" class="corner4">
+        <div :sectionId="9" class="corner4" title="洲际轨道交通">
           <div class="corner-flags">
-            <div v-for="item in locations" :key="item">
+            <div v-for="item in locations" :key="item.title" :title="item.title">
               <img width="30px" height="30px" v-if="item.sectionId==9" :src="item.color" alt="error">
             </div>
           </div>
@@ -113,16 +113,28 @@
         isDicing: false,
         locations: [{
           sectionId: 0,
-          color: require("@/assets/redFlag.png")
+          color: require("@/assets/redFlag.png"),
+          title: "小丸子"
+          // lands:[],
+          // landColor: require("@/assets/redRoad.png")
         }, {
           sectionId: 0,
-          color: require("@/assets/greenFlag.png")
+          color: require("@/assets/greenFlag.png"),
+          title:"懒羊羊"
+          // lands:[],
+          // landColor: require("@/assets/greenRoad.png")
         }, {
           sectionId: 0,
-          color: require("@/assets/yellowFlag.png")
+          color: require("@/assets/yellowFlag.png"),
+          title:"海绵宝宝"
+          // lands:[],
+          // landColor: require("@/assets/greenRoad.png")
         }, {
           sectionId: 0,
-          color: require("@/assets/blueFlag.png")
+          color: require("@/assets/blueFlag.png"),
+          title:"小新"
+          // lands:[],
+          // landColor: require("@/assets/greenRoad.png")
         }],
         selected: 0
       }
@@ -139,6 +151,8 @@
           this.locations[this.selected].sectionId %= 36;
           this.selected++;
           this.selected %= 4;
+          this.$EventBus.$emit('playerId',this.selected);
+          // this.$EventBus.$emit('buyLand',require("@/assets/greenRoad.png"),this.locations[this.selected-1].sectionId);
         }, 500)
         setTimeout(() => {
           this.isDicing = false;

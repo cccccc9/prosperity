@@ -1,9 +1,10 @@
 <template>
-  <div class="item" :title="title" :class="top==true?'item-top':'item-left'" :style="{'background-color':itemColor}">
-    <div class="content" :class="top==true?'inner-top':'inner-left'">
+  <div class="item" :class="top==true?'item-top':'item-left'" :style="{'background-color':itemColor}">
+    <div class="content" :class="top==true?'inner-top':'inner-left'" :title="ownners[ownner]">
       <!-- {{title}} -->
-      <img :title="title" width="30px" height="30px" :src="imgUrl" alt="error">
-      <div v-for="item in location" :key="item">
+      <img v-if="landStatus==0" :title="title" width="30px" height="30px" :src="imgUrl" alt="error">
+      <img v-if="landStatus==1" :title="title" width="30px" height="30px" :src="landStyle" alt="error">
+      <div v-for="item in location" :key="item.title" :title="item.title">
         <img width="30px" height="30px" v-if="item.sectionId==sectionId" :src="item.color" alt="error">
       </div>
     </div>
@@ -58,13 +59,23 @@
     },
     data() {
       return {
-        landStatus: '', // 描述土地状态
-        ownner: '', // 土地拥有者
+        landStatus: 0, // 描述土地状态
+        ownner: 4, // 土地拥有者
+        ownners:["小丸子","懒羊羊","海绵宝宝","小新",""],
         price: 0, // 土地价格
         fees: 0, //过路费
+        landStyle: null,
       }
     },
-    methods: {}
+    methods: {},
+    created(){
+       this.$EventBus.$on("buyLand", (url,id) => {
+        if(id==this.sectionId){
+          this.landStatus = 1;
+          this.landStyle = url;
+        }
+      })
+    }
   }
 </script>
 
